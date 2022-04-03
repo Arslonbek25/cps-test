@@ -1,17 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+import { Clicker } from "./Clicker";
+import { Scoreboard } from "./Scoreboard";
+import "./style.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function App() {
+	const [clicks, setClicks] = useState(0);
+	const [time, setTime] = useState(0);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+	useEffect(() => {
+		const timer = setInterval(() => {
+			if (time > 0) setTime(time - 1);
+		}, 1000);
+		return () => clearInterval(timer);
+	}, [time]);
+
+	function handleClick() {
+		if (time) return () => setClicks(clicks + 1);
+		return () => {
+			setTime(10);
+			setClicks(0);
+		};
+	}
+
+	return (
+		<>
+			<Scoreboard clicks={clicks} time={time} />
+			<Clicker click={handleClick()} />
+		</>
+	);
+}
+
+const root = createRoot(document.getElementById("root"));
+root.render(<App />);
