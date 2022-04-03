@@ -10,8 +10,8 @@ function App() {
 
 	useEffect(() => {
 		const timer = setInterval(() => {
-			if (time > 0) setTime(time - 1);
-		}, 1000);
+			if (time > 0) setTime((time - 0.1).toFixed(1));
+		}, 100);
 		return () => clearInterval(timer);
 	}, [time]);
 
