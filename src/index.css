@@ -6,11 +6,10 @@
 }
 
 body {
-	background: rgb(237, 239, 241);
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
 		"Open Sans", "Helvetica Neue", sans-serif;
 	font-size: 16px;
-	color: rgb(51, 51, 51);
+	color: #21232f;
 }
 
 html,
@@ -20,34 +19,92 @@ body,
 	height: 100%;
 }
 
+#root {
+	display: flex;
+	flex-direction: column;
+}
+
 button {
 	cursor: pointer;
 	user-select: none;
 }
 
-/* Styling */
+/* Scoreboard */
 
 .scoreboard {
-	line-height: 1.5rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	background: rgb(59, 63, 75);
+	text-transform: uppercase;
 	text-align: center;
 }
 
-.scoreboard p {
-	display: inline-block;
-	width: 33.33%;
+.scoreboard div {
+	padding: 15px;
 }
 
+.scoreboard p {
+	margin-bottom: 5px;
+	font-size: 54px;
+	line-height: 60px;
+	font-weight: 900;
+}
+
+.scoreboard .clicks {
+	border-bottom: 5px solid #8ee340;
+	color: #8ee340;
+}
+.scoreboard .clicks p {
+	text-shadow: 1px 1px #0c9430, 2px 2px #0c9430, 3px 3px #0c9430, 4px 4px #0c9430;
+}
+.scoreboard .cps {
+	border-bottom: 5px solid #ffe52a;
+	color: #ffe52a;
+}
+.scoreboard .cps p {
+	text-shadow: 1px 1px #b98046, 2px 2px #b98046, 3px 3px #b98046, 4px 4px #b98046;
+}
+.scoreboard .time {
+	border-bottom: 5px solid #9e92ff;
+	color: #9e92ff;
+}
+.scoreboard .time p {
+	text-shadow: 1px 1px #6c55eb, 2px 2px #6c55eb, 3px 3px #6c55eb, 4px 4px #6c55eb;
+}
+
+/* Buttons */
+
 .clicker {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: inherit;
 }
 
 .clicker button:first-child {
 	display: block;
 	border-radius: 50%;
+	margin-bottom: 10px;
+	background: none;
 	height: 200px;
 	width: 200px;
 	font-size: 24px;
+}
+.clicker button:last-child {
+	border-bottom: 5px solid #5d4dd4;
+	border-radius: 10px;
+	/* padding: 5px 10px; */
+	/* border-radius: 3px; */
+
+	background-color: #8174e5;
+	padding: 18px 30px;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: 700;
+	color: #fff;
+	border-width: 0 0 5px 0;
+}
+.clicker button:last-child:hover {
+	background: #7063d8;
 }

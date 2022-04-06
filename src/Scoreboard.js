@@ -10,9 +10,18 @@ export function Scoreboard(props) {
 
 	return (
 		<div className="scoreboard">
-			<p>Time: {props.time}</p>
-			<p>CPS: {getCPS()}</p>
-			<p>Clicks: {props.clicks}</p>
+			<div className="time">
+				<p>{props.time}</p>
+				<span>Timer</span>
+			</div>
+			<div className="cps">
+				<p>{getCPS()}</p>
+				<span>CPS</span>
+			</div>
+			<div className="clicks">
+				<p>{props.clicks}</p>
+				<span>Clicks</span>
+			</div>
 		</div>
 	);
 }
