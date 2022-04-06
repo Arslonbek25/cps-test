@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { Clicker } from "./Clicker";
 import { Scoreboard } from "./Scoreboard";
@@ -6,27 +6,36 @@ import "./style.css";
 
 function App() {
 	const [clicks, setClicks] = useState(0);
-	const [time, setTime] = useState(0);
+	const [time, setTime] = useState(3);
 
-	useEffect(() => {
-		const timer = setInterval(() => {
-			if (time > 0) setTime((time - 0.1).toFixed(1));
-		}, 100);
-		return () => clearInterval(timer);
-	}, [time]);
+	let started = useRef(false);
 
 	function handleClick() {
-		if (time) return () => setClicks(clicks + 1);
-		return () => {
-			setTime(10);
-			setClicks(0);
-		};
+		if (time > 0) started.current = true;
+		if (time > 0 && started.current) setClicks(clicks + 1);
+		else started.current = false;
 	}
+
+	function restart() {
+		if (started.current) return;
+		setTime(3);
+		setClicks(0);
+	}
+
+	useEffect(() => {
+		function handleTimer() {
+			if (time > 0 && started.current) {
+				setTime((prevTime) => (prevTime - 0.1).toFixed(1));
+			}
+		}
+		const timer = setTimeout(handleTimer, 100);
+		return () => clearTimeout(timer);
+	}, [started.current, time]);
 
 	return (
 		<>
 			<Scoreboard clicks={clicks} time={time} />
-			<Clicker click={handleClick()} />
+			<Clicker click={() => handleClick()} restart={() => restart()} />
 		</>
 	);
 }

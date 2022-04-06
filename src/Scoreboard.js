@@ -2,9 +2,10 @@ import React from "react";
 
 export function Scoreboard(props) {
 	function getCPS() {
-		let number = props.clicks / (10 - props.time);
-		if (isNaN(number)) return 0;
-		return number.toFixed(1);
+		const cps = parseFloat((props.clicks / (3 - props.time)).toFixed(1));
+		const isValidCPS = (n) => (isNaN(n) || n === Infinity ? "0.0" : n);
+
+		return isValidCPS(cps);
 	}
 
 	return (
