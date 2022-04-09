@@ -43,7 +43,6 @@ export function App() {
 	}
 
 	useEffect(() => {
-		console.log(score);
 		const timer = setTimeout(handleTimer, 100);
 		return () => clearTimeout(timer);
 	}, [started.current, time]);
