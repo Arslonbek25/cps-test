@@ -1,13 +1,6 @@
 import React from "react";
 
-export function Scoreboard(props) {
-	function getCPS() {
-		const cps = parseFloat((props.clicks / (props.defaultTime - props.time)).toFixed(2));
-		const isValidCPS = (n) => (isNaN(n) || n === Infinity ? "0.00" : n);
-
-		return isValidCPS(cps);
-	}
-
+export default function Stats(props) {
 	return (
 		<div className="scoreboard">
 			<div className="time">
@@ -15,7 +8,7 @@ export function Scoreboard(props) {
 				<span>Timer</span>
 			</div>
 			<div className="cps">
-				<p>{getCPS()}</p>
+				<p>{props.cps}</p>
 				<span>CPS</span>
 			</div>
 			<div className="clicks">
