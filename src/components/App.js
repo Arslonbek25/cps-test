@@ -24,7 +24,7 @@ export function App() {
 	}
 
 	function handleTimer() {
-		if (time > 0 && started.current) setTime((prevTime) => (prevTime - 0.1).toFixed(1));
+		if (time > 0 && started.current) setTime((prevTime) => +(prevTime - 0.1).toFixed(1));
 		else {
 			started.current = false;
 			setScore(
@@ -37,7 +37,7 @@ export function App() {
 
 	function getCPS() {
 		const cps = parseFloat((clicks / (defaultTime - time)).toFixed(2));
-		const isValidCPS = (n) => (isNaN(n) || n === Infinity ? "0.00" : n);
+		const isValidCPS = (n) => (isNaN(n) || !isFinite(n) ? "0.00" : n);
 
 		return isValidCPS(cps);
 	}
